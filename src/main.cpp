@@ -1,11 +1,10 @@
 #include <Arduino.h>
 
-int greenPin = 2;
-int redPin1 = 3;
-int redPin2 = 4;
+int greenPin = 4;
+int redPin1 = 2;
+int redPin2 = 3;
 int redPin3 = 5;
-int redPin4 = 6;
-int redPin5 = 7;
+int redPin4 = 7;
 int delayTime = 100;
 int breakTime = 5000;
 int readPin = A0;
@@ -17,8 +16,6 @@ pinMode(redPin1, OUTPUT);
 pinMode(redPin2, OUTPUT);
 pinMode(redPin3, OUTPUT);
 pinMode(redPin4, OUTPUT);
-pinMode(redPin5, OUTPUT);
-
 pinMode(readPin, INPUT);
 Serial.begin(9600);
 }
@@ -39,6 +36,7 @@ void onUserLoose() {
     digitalWrite(redPin1, HIGH);
     digitalWrite(redPin2, HIGH);
     digitalWrite(redPin3, HIGH);
+    digitalWrite(redPin4, HIGH);
     delay(breakTime);
 }
 
@@ -85,6 +83,14 @@ void loop() {
             else {
                 delay(delayTime);
                 digitalWrite(redPin3, LOW);
+                digitalWrite(redPin4, HIGH);
+                if(onButtonPressed()) {
+                    onUserLoose();
+                }
+                else {
+                    delay(delayTime);
+                    digitalWrite(redPin4, LOW);
+                }
             }
             }
             } 
